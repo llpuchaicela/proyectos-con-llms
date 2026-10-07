@@ -5,51 +5,35 @@ import ollama
 
 MODEL = "qwen2.5vl:7b"
 
-
 def analizar_imagen(image_path: Path) -> dict:
+
     if not image_path.exists():
         raise FileNotFoundError(f"No existe: {image_path}")
 
     response = ollama.chat(
         model=MODEL,
+        format="json",
         messages=[
             {
                 "role": "user",
                 "content": """
 Analiza cuidadosamente el documento de esta imagen.
 
-Este sistema es un extractor documental GENERICO.
-El documento puede ser de cualquier tipo.
+Eres un sistema GENERICO de Document AI.
+El documento puede ser de cualquier tipo:
+factura, certificado, formulario, contrato, informe,
+carta, documento académico, documento administrativo,
+comprobante, documento de identidad, tabla, documento
+escaneado, fotografía u otro.
 
-Puede tratarse, por ejemplo, de:
+NO asumas un tipo específico de documento.
 
-- una ficha académica;
-- una factura;
-- un certificado;
-- un formulario;
-- un contrato;
-- un informe;
-- una solicitud;
-- un documento de identidad;
-- un comprobante;
-- una tabla;
-- una carta;
-- un documento administrativo;
-- un documento escaneado;
-- una fotografía de un documento;
-- o cualquier otro tipo de documento.
+OBJETIVO:
+Extraer toda la información visible y relevante.
+NO resumir.
+NO inventar información.
 
-NO asumas un tipo de documento específico.
-
-Tu tarea es comprender el documento y extraer TODA la información
-visible y relevante.
-
-Devuelve ÚNICAMENTE un objeto JSON válido.
-No escribas explicaciones.
-No escribas texto antes ni después del JSON.
-No utilices bloques Markdown como ```json.
-
-Utiliza esta estructura general:
+Devuelve únicamente JSON válido con esta estructura:
 
 {
     "tipo_documento": null,
@@ -58,116 +42,73 @@ Utiliza esta estructura general:
     "secciones": [],
     "tablas": [],
     "texto_completo": null,
-    "elementos_adicionales": []
+    "elementos_adicionales": [],
+    "evaluacion": {
+        "calidad_global": 0,
+        "completitud": 0,
+        "estructura": 0,
+        "legibilidad": 0,
+        "confianza": 0
+    }
 }
 
-REGLAS:
+REGLAS DE EXTRACCION:
 
-1. Identifica primero qué tipo de documento es.
+- Identifica el tipo de documento.
+- Extrae los datos relevantes en "campos".
+- Crea dinámicamente los nombres de los campos.
+- Identifica todas las secciones.
+- Identifica todas las tablas y conserva encabezados y filas.
+- Transcribe el texto visible en "texto_completo".
+- Incluye firmas, sellos, códigos, fechas, números,
+  encabezados y notas cuando sean relevantes.
+- Conserva los valores tal como aparecen.
+- No inventes información.
+- Usa null cuando un dato exista pero sea ilegible.
+- Usa [] cuando no existan secciones, tablas o elementos adicionales.
+- Mantén las relaciones entre los datos.
 
-2. Describe brevemente el propósito o contenido general
-   del documento.
+EVALUACION:
 
-3. En "campos", identifica los datos relevantes encontrados.
-   Los nombres de los campos deben ser creados dinámicamente
-   según el documento.
+Después de realizar la extracción, evalúa tu propio resultado
+utilizando una escala de 0 a 100.
 
-   Ejemplo:
+"calidad_global":
+Calidad general de la extracción.
 
-   "campos": {
-       "nombre": "...",
-       "fecha": "...",
-       "numero_documento": "...",
-       "institucion": "..."
-   }
+"completitud":
+Cantidad de información relevante que fue recuperada.
 
-   NO utilices campos que no existan en el documento.
+"estructura":
+Qué tan correctamente se identificaron campos, secciones y tablas.
 
-4. En "secciones", identifica las diferentes partes o apartados
-   del documento.
+"legibilidad":
+Qué tan correctamente se leyó el contenido visible.
 
-   Ejemplo:
+"confianza":
+Nivel general de confianza en la extracción.
 
-   "secciones": [
-       {
-           "nombre": "Datos personales",
-           "contenido": "..."
-       },
-       {
-           "nombre": "Observaciones",
-           "contenido": "..."
-       }
-   ]
+La evaluación debe basarse únicamente en la información visible
+en la imagen.
 
-5. En "tablas", identifica todas las tablas visibles.
+No inventes información para mejorar la puntuación.
 
-   Cada tabla debe conservar sus encabezados y filas.
-
-   Ejemplo:
-
-   "tablas": [
-       {
-           "nombre": "Detalle",
-           "columnas": ["Producto", "Cantidad", "Precio"],
-           "filas": [
-               ["Producto A", "2", "10.00"],
-               ["Producto B", "1", "15.00"]
-           ]
-       }
-   ]
-
-6. En "texto_completo", incluye el texto visible del documento
-   en la medida en que pueda ser leído correctamente.
-
-7. En "elementos_adicionales", incluye información relevante
-   que no encaje en campos, secciones o tablas.
-
-8. Conserva los valores exactamente como aparecen cuando sea
-   posible.
-
-9. No inventes información.
-
-10. Si un dato existe pero no puede leerse correctamente,
-    utiliza null.
-
-11. Si una sección no existe, utiliza una lista vacía [].
-
-12. Si no existen tablas, utiliza [].
-
-13. Si no existen elementos adicionales, utiliza [].
-
-14. No conviertas automáticamente información ambigua en una
-    interpretación.
-
-15. Mantén las relaciones entre los datos.
-
-16. Si existen firmas, sellos, logotipos, encabezados,
-    códigos, números, fechas u otros elementos relevantes,
-    inclúyelos dentro de la estructura correspondiente.
-
-17. Si el documento contiene información repetida,
-    conserva la información de manera coherente.
-
-18. El objetivo NO es resumir el documento.
-    El objetivo es EXTRAER la información que contiene.
-
-19. El resultado final debe ser JSON válido.
+Devuelve únicamente el JSON.
 """,
                 "images": [str(image_path)],
             }
         ],
+        options={
+            "temperature": 0.0,
+            "num_ctx": 8192,
+            "num_predict": 3000,
+        },
     )
 
     contenido = response["message"]["content"].strip()
 
-    # Eliminar posibles bloques Markdown
-    if contenido.startswith("```"):
-        contenido = contenido.replace("```json", "")
-        contenido = contenido.replace("```", "")
-        contenido = contenido.strip()
-
     try:
-        resultado = json.loads(contenido)
+        return json.loads(contenido)
 
     except json.JSONDecodeError as error:
         raise ValueError(
@@ -175,5 +116,3 @@ REGLAS:
             f"Error: {error}\n\n"
             f"Respuesta recibida:\n{contenido}"
         )
-
-    return resultado

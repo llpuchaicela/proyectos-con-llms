@@ -1,100 +1,75 @@
 {
-    "tipo_documento": "Ficha de actividad de aprendizaje",
-    "descripcion": "Este documento es una ficha de actividad de aprendizaje utilizada en un instituto de educación superior tecnológico público. Contiene información sobre la actividad de aprendizaje, los contenidos, la secuencia metodológica y la evaluación de los aprendizajes.",
+    "tipo_documento": "Ficha de Actividad de Aprendizaje",
+    "descripcion": "Documentación de una actividad de aprendizaje en el Instituto de Educación Superior Tecnológico Público 'Francisco de Paula Gonzales Vigil'.",
     "campos": {
-        "actividad_de_aprendizaje": "01",
-        "título": "LOS ACEROS. TIPOS. ALEACIONES. PROPIEDADES.",
-        "unidad_didactica": "TECNOLOGÍA DE MATERIALES",
-        "cc_pp": "ELECTROTECNIA INDUSTRIAL",
-        "turno": "D/N",
-        "nombre_del_docente": "LIC. MIGUEL A. ESCOBAR MENDOZA",
-        "elemento_de_la_capacidad_terminal": "Identifica y reconoce las propiedades y sus aplicaciones de uso magnético.",
-        "lugar": "LABORATORIO",
-        "horas_pedagogicas": "-",
-        "semana": "1°",
-        "procedimentales": "• Diferencia los tipos de acero, aleaciones de uso magnético y sus tratamientos térmicos.",
-        "conceptuales": "• Acero. Tipos. Aplicaciones de orden industrial. • Tratamiento térmico de los aceros.",
-        "actitudinales": "• Criterio técnico para la identificación.",
-        "motivación": "• Importancia del acero en la construcción de máquinas eléctricas.",
-        "proporcionar_información": "• Los aceros y sus aleaciones. • Propiedades generales. • Especificaciones técnicas.",
-        "desarrollar_práctica_dirigida": "• Reconocer los laminados magnéticos usados en la construcción de máquinas eléctricas...",
-        "resolución_de_problemas_y_transferencia": "• Diferenciación de los laminados magnéticos.",
-        "evaluación": "• Especificar laminados magnéticos.",
-        "criterio_de_evaluación": "Diferencia los tipos de acero según sus propiedades.",
-        "indicadores": "• Clasifica adecuadamente los materiales electroféricos. • Identifica los tipos de aceros.",
-        "técnicas": "• Práctica de Taller. • Ejecuciones en Taller.",
-        "instrumentos": "• Prueba de ejecución. • Cuadro de progresión."
+        "ACTIVIDAD DE APRENDIZAJE N°": "01",
+        "TITULO": "LOS ACEROS. TIPOS. ALEACIONES. PROPIEDADES.",
+        "UNIDAD DIDACTICA": "TECNOLOGÍA DE MATERIALES",
+        "CC. PP.": "ELECTROTECNIA INDUSTRIAL",
+        "TURNO": "D/N",
+        "NOMBRE DEL DOCENTE": "LIC. MIGUEL A. ESCOBAR MENDOZA",
+        "Elemento de la Capacidad Terminal": "Identifica y reconoce las propiedades y sus aplicaciones de uso magnético.",
+        "LUGAR": "LABORATORIO: - TALLER: 02 AULA: -",
+        "HORAS PEDAGÓGICAS": "- 02 -",
+        "SEMANA": "1°"
     },
     "secciones": [
+        "CONTENIDOS",
+        "SECUENCIA METODOLÓGICA",
+        "EVALUACIÓN DE LOS APRENDIZAJES"
+    ],
+    "tablas": [
         {
-            "nombre": "CONTENIDOS",
-            "contenido": [
-                {
-                    "procedimentales": "• Diferencia los tipos de acero, aleaciones de uso magnético y sus tratamientos térmicos.",
-                    "conceptuales": "• Acero. Tipos. Aplicaciones de orden industrial. • Tratamiento térmico de los aceros.",
-                    "actitudinales": "• Criterio técnico para la identificación."
-                }
-            ]
-        },
-        {
-            "nombre": "SECUENCIA METODOLÓGICA",
-            "contenido": [
-                {
-                    "momentos": "Motivación (*)",
-                    "estrategias": "• Importancia del acero en la construcción de máquinas eléctricas.",
-                    "métodos_técnicas": "• Exposición.",
-                    "recursos": "• Catálogo de fabricantes.",
-                    "duración": "10min"
-                },
-                {
-                    "momentos": "Proporcionar información",
-                    "estrategias": "• Los aceros y sus aleaciones. • Propiedades generales. • Especificaciones técnicas.",
-                    "métodos_técnicas": "• Demostración.",
-                    "recursos": "• Tablas de fabricantes. • Separata informativa.",
-                    "duración": "50min"
-                },
-                {
-                    "momentos": "Desarrollar Práctica Dirigida",
-                    "estrategias": "• Reconocer los laminados magnéticos usados en la construcción de máquinas eléctricas...",
-                    "métodos_técnicas": "• Experimentación.",
-                    "recursos": "• Cuadro comparativo.",
-                    "duración": "20min"
-                },
-                {
-                    "momentos": "Resolución de Problemas y transferencia",
-                    "estrategias": "• Diferenciación de los laminados magnéticos.",
-                    "métodos_técnicas": "• Casos propuestos.",
-                    "recursos": "• Maqueta-mostrario de laminados magnéticos.",
-                    "duración": "10min"
-                },
-                {
-                    "momentos": "Evaluación (*)",
-                    "estrategias": "• Especificar laminados magnéticos.",
-                    "métodos_técnicas": "• Casos propuestos.",
-                    "recursos": "• Cuadro resumen.",
-                    "duración": "10min"
-                }
-            ]
-        },
-        {
-            "nombre": "EVALUACIÓN DE LOS APRENDIZAJES",
-            "contenido": [
-                {
-                    "criterio_de_evaluación": "Diferencia los tipos de acero según sus propiedades.",
-                    "indicadores": "• Clasifica adecuadamente los materiales electroféricos. • Identifica los tipos de aceros.",
-                    "técnicas": "• Práctica de Taller. • Ejecuciones en Taller.",
-                    "instrumentos": "• Prueba de ejecución. • Cuadro de progresión."
-                }
+            "MOMENTOS": [
+                "Motivación (*)",
+                "Proporcionar Información",
+                "Desarrollar Práctica Dirigida",
+                "Resolución de Problemas y transferencia",
+                "Evaluación (*)"
+            ],
+            "ESTRATEGIAS": [
+                "Exposición.",
+                "Demostración.",
+                "Experimentación.",
+                "Casos propuestos.",
+                "Casos propuestos."
+            ],
+            "MÉTODOS/TECNIAS": [
+                "Explicación.",
+                "Demostración.",
+                "Experimentación.",
+                "Casos propuestos.",
+                "Casos propuestos."
+            ],
+            "RECURSOS": [
+                "Catálogo de fabricantes.",
+                "Tablas de fabricantes.",
+                "Separata informativa.",
+                "Cuadro comparativo.",
+                "Maqueta-mostrario de laminados magnéticos."
+            ],
+            "DURACION": [
+                "10min",
+                "50min",
+                "20min",
+                "10min",
+                "10min"
             ]
         }
     ],
-    "tablas": [],
-    "texto_completo": "INSTITUTO DE EDUCACIÓN SUPERIOR TECNOLÓGICO PÚBLICO \"FRANCISCO DE PAULA GONZALES VIGIL\" FICHA DE ACTIVIDAD DE APRENDIZAJE ACTIVIDAD DE APRENDIZAJE N°: 01 TITULO: LOS ACEROS. TIPOS. ALEACIONES. PROPIEDADES. UNIDAD DIDACTICA: TECNOLOGÍA DE MATERIALES CC. PP.: ELECTROTECNIA INDUSTRIAL TURNO: D/N NOMBRE DEL DOCENTE: LIC. MIGUEL A. ESCOBAR MENDOZA Elemento de la Capacidad Terminal: LUGAR HORAS PEDAGÓGICAS SEMANA 1° Identifica y reconoce las propiedades y sus aplicaciones de uso magnético. LABORATORIO: - TALLER: 02 1° AULA: - CONTENIDOS PROCEDIMENTALES CONCEPTUALES ACTITUDINALES • Diferencia los tipos de acero, aleaciones de uso magnético y sus tratamientos térmicos. • Acero. Tipos. Aplicaciones de orden industrial. • Tratamiento térmico de los aceros. • Criterio técnico para la identificación. SECUENCIA METODOLÓGICA MOMENTOS ESTRATEGIAS MÉTODOS/TECNIAS RECURSOS DURACIÓN Motivación (*) • Importancia del acero en la construcción de máquinas eléctricas. • Exposición. • Catálogo de fabricantes. 10min Proporcionar información • Los aceros y sus aleaciones. • Propiedades generales. • Especificaciones técnicas. • Demostración. • Tablas de fabricantes. • Separata informativa. 50min Desarrollar Práctica Dirigida • Reconocer los laminados magnéticos usados en la construcción de máquinas eléctricas... • Experimentación. • Cuadro comparativo. 20min Resolución de Problemas y transferencia • Diferenciación de los laminados magnéticos. • Casos propuestos. • Maqueta-mostrario de laminados magnéticos. 10min Evaluación (*) • Especificar laminados magnéticos. • Casos propuestos. • Cuadro resumen. 10min EVALUACIÓN DE LOS APRENDIZAJES CRITERIO DE EVALUACIÓN Diferencia los tipos de acero según sus propiedades. INDICADORES TÉCNICAS INSTRUMENTOS • Clasifica adecuadamente los materiales electroféricos. • Práctica de Taller. • Prueba de ejecución. • Identifica los tipos de aceros. • Ejecuciones en Taller. • Cuadro de progresión. * La motivación y evaluación se realiza en todos los momentos de la secuencia metodológica. Tacna, 26 de Marzo del 2012. VEBF Jefe de Área Académica Lic. Miguel A. Escobar Mendoza CPPe 2400409 418",
+    "texto_completo": "FICHA DE ACTIVIDAD DE APRENDIZAJE\n\nACTIVIDAD DE APRENDIZAJE N°: 01 TITULO: LOS ACEROS. TIPOS. ALEACIONES. PROPIEDADES.\nUNIDAD DIDACTICA: TECNOLOGÍA DE MATERIALES CC. PP.: ELECTROTECNIA INDUSTRIAL TURNO: D/N\nNOMBRE DEL DOCENTE: LIC. MIGUEL A. ESCOBAR MENDOZA\n\nElemento de la Capacidad Terminal: Identifica y reconoce las propiedades y sus aplicaciones de uso magnético.\nLUGAR: LABORATORIO: - TALLER: 02 AULA: -\nHORAS PEDAGÓGICAS: - 02 -\nSEMANA: 1°\n\nCONTENIDOS\nPROCEDIMENTALES • Diferencia los tipos de acero, aleaciones de uso magnético y sus tratamientos térmicos\nCONCEPTUALES • Acero. Tipos. Aplicaciones de orden industrial\nACTITUDINALES • Criterio técnico para la identificación.\n\nSECUENCIA METODOLÓGICA\nMOMENTOS ESTRATEGIAS MÉTODOS/TECNIAS RECURSOS DURACION Motivación (*) • Importancia del acero en la construcción de máquinas eléctricas. • Exposición. • Catálogo de fabricantes. 10min Proporcionar Información • Los aceros y sus aleaciones. • Propiedades generales. • Especificaciones técnicas. • Demostración. • Tablas de fabricantes. • Separata informativa. 50min Desarrollar Práctica Dirigida • Reconocer los laminados magnéticos usados en la construcción de máquinas eléctricas... • Experimentación. • Cuadro comparativo. 20min Resolución de Problemas y transferencia • Diferenciación de los laminados magnéticos. • Casos propuestos. • Maqueta-mostrario de laminados magnéticos. 10min Evaluación (*) • Especificar laminados magnéticos. • Casos propuestos. • Cuadro resumen. 10min\n\nEVALUACIÓN DE LOS APRENDIZAJES\nCRITERIO DE EVALUACIÓN Diferencia los tipos de acero según sus propiedades.\nINDICADORES TECNICAS INSTRUMENTOS • Clasifica adecuadamente los materiales electroféricos. • Práctica de Taller. • Prueba de ejecución. • Identifica los tipos de aceros. • Ejecuciones en Taller. • Cuadro de progresión.\n* La motivación y evaluación se realiza en todos los momentos de la secuencia metodológica.\nTacna, 26 de Marzo del 2012.\n\nVEBF Jefe de Área Académica\nLic. Miguel A. Escobar Mendoza\nCPPe 2400409 418",
     "elementos_adicionales": [],
+    "evaluacion": {
+        "calidad_global": 90,
+        "completitud": 95,
+        "estructura": 90,
+        "legibilidad": 95,
+        "confianza": 90
+    },
     "metadata": {
         "archivo": "prueba ficha pdf .webp",
         "modelo": "qwen2.5vl:7b",
-        "tiempo_procesamiento_segundos": 787.4,
-        "tiempo_procesamiento_formateado": "787.40 segundos"
+        "tiempo_procesamiento_segundos": 830.27,
+        "tiempo_procesamiento_formateado": "830.27 segundos"
     }
 }
