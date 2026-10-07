@@ -16,54 +16,142 @@ def analizar_imagen(image_path: Path) -> dict:
             {
                 "role": "user",
                 "content": """
-Analiza cuidadosamente esta imagen como un sistema
-de extracción documental.
+Analiza cuidadosamente el documento de esta imagen.
 
-Extrae TODA la información visible del documento.
+Este sistema es un extractor documental GENERICO.
+El documento puede ser de cualquier tipo.
+
+Puede tratarse, por ejemplo, de:
+
+- una ficha académica;
+- una factura;
+- un certificado;
+- un formulario;
+- un contrato;
+- un informe;
+- una solicitud;
+- un documento de identidad;
+- un comprobante;
+- una tabla;
+- una carta;
+- un documento administrativo;
+- un documento escaneado;
+- una fotografía de un documento;
+- o cualquier otro tipo de documento.
+
+NO asumas un tipo de documento específico.
+
+Tu tarea es comprender el documento y extraer TODA la información
+visible y relevante.
 
 Devuelve ÚNICAMENTE un objeto JSON válido.
 No escribas explicaciones.
 No escribas texto antes ni después del JSON.
 No utilices bloques Markdown como ```json.
 
-Utiliza exactamente esta estructura:
+Utiliza esta estructura general:
 
 {
     "tipo_documento": null,
-    "institucion": null,
-    "titulo": null,
-    "actividad": null,
-    "unidad_didactica": null,
-    "programa": null,
-    "turno": null,
-    "docente": null,
-    "fecha": null,
-    "contenido": {
-        "procedimental": null,
-        "conceptual": null,
-        "actitudinal": null
-    },
-    "metodologia": [],
-    "evaluacion": [],
-    "firmas": [],
-    "texto_adicional": []
+    "descripcion": null,
+    "campos": {},
+    "secciones": [],
+    "tablas": [],
+    "texto_completo": null,
+    "elementos_adicionales": []
 }
 
-Reglas:
+REGLAS:
 
-1. Lee todo el texto que puedas identificar.
-2. Identifica todos los campos y sus valores.
-3. Conserva exactamente los valores encontrados.
-4. No inventes información.
-5. Si un campo no aparece o no es legible, utiliza null.
-6. Si existen tablas, conviértelas en listas de objetos.
-7. En "metodologia" conserva toda la información de la tabla.
-8. En "evaluacion" conserva toda la información de la tabla.
-9. En "firmas" incluye los nombres o cargos visibles.
-10. En "texto_adicional" incluye cualquier información importante
-    que no encaje en los demás campos.
-11. Mantén el contenido completo, no hagas un resumen.
-12. El resultado debe ser JSON válido.
+1. Identifica primero qué tipo de documento es.
+
+2. Describe brevemente el propósito o contenido general
+   del documento.
+
+3. En "campos", identifica los datos relevantes encontrados.
+   Los nombres de los campos deben ser creados dinámicamente
+   según el documento.
+
+   Ejemplo:
+
+   "campos": {
+       "nombre": "...",
+       "fecha": "...",
+       "numero_documento": "...",
+       "institucion": "..."
+   }
+
+   NO utilices campos que no existan en el documento.
+
+4. En "secciones", identifica las diferentes partes o apartados
+   del documento.
+
+   Ejemplo:
+
+   "secciones": [
+       {
+           "nombre": "Datos personales",
+           "contenido": "..."
+       },
+       {
+           "nombre": "Observaciones",
+           "contenido": "..."
+       }
+   ]
+
+5. En "tablas", identifica todas las tablas visibles.
+
+   Cada tabla debe conservar sus encabezados y filas.
+
+   Ejemplo:
+
+   "tablas": [
+       {
+           "nombre": "Detalle",
+           "columnas": ["Producto", "Cantidad", "Precio"],
+           "filas": [
+               ["Producto A", "2", "10.00"],
+               ["Producto B", "1", "15.00"]
+           ]
+       }
+   ]
+
+6. En "texto_completo", incluye el texto visible del documento
+   en la medida en que pueda ser leído correctamente.
+
+7. En "elementos_adicionales", incluye información relevante
+   que no encaje en campos, secciones o tablas.
+
+8. Conserva los valores exactamente como aparecen cuando sea
+   posible.
+
+9. No inventes información.
+
+10. Si un dato existe pero no puede leerse correctamente,
+    utiliza null.
+
+11. Si una sección no existe, utiliza una lista vacía [].
+
+12. Si no existen tablas, utiliza [].
+
+13. Si no existen elementos adicionales, utiliza [].
+
+14. No conviertas automáticamente información ambigua en una
+    interpretación.
+
+15. Mantén las relaciones entre los datos.
+
+16. Si existen firmas, sellos, logotipos, encabezados,
+    códigos, números, fechas u otros elementos relevantes,
+    inclúyelos dentro de la estructura correspondiente.
+
+17. Si el documento contiene información repetida,
+    conserva la información de manera coherente.
+
+18. El objetivo NO es resumir el documento.
+    El objetivo es EXTRAER la información que contiene.
+
+19. El resultado final debe ser JSON válido.
 """,
                 "images": [str(image_path)],
             }
@@ -72,18 +160,20 @@ Reglas:
 
     contenido = response["message"]["content"].strip()
 
-    # El modelo podría devolver accidentalmente ```json ... ```
+    # Eliminar posibles bloques Markdown
     if contenido.startswith("```"):
         contenido = contenido.replace("```json", "")
         contenido = contenido.replace("```", "")
         contenido = contenido.strip()
 
     try:
-        return json.loads(contenido)
+        resultado = json.loads(contenido)
 
     except json.JSONDecodeError as error:
         raise ValueError(
-            f"El modelo no devolvió un JSON válido.\n"
+            "El modelo no devolvió un JSON válido.\n"
             f"Error: {error}\n\n"
             f"Respuesta recibida:\n{contenido}"
         )
+
+    return resultado
